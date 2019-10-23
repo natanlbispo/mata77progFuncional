@@ -14,21 +14,17 @@
 
 ;; (a b) != (a.b) -> aqui é par, b não é c
 
-;; Imprime cabeça Lista
 (define a '(a b c))
 (first a)
 
-;; Imprime cabeça par
 (define par '(a . b))
 (car par)
 
-;;Imprime causa Lista
 (define (cauda cau)
   (rest cau)
   )
 (cauda '(a b c))
 
-;;Imprime cauda Par
 (define (cauda2 cau)
   (cdr cau)
   )
