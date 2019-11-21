@@ -1,3 +1,48 @@
+;; Macro
+
+;;1
+(define-syntax (pipe-v1 stx)
+  (syntax-case stx ()
+      [(_ val-expr) #'val-expr]
+      )
+  )
+  
+;;2
+
+(define-syntax (pipe-v2 stx)
+  (syntax-case stx ()
+    [(_ val-expr) #'val-expr]
+    [(_ val-expr (fn-expr arg-expr ...))
+          #'(fn-expr val-expr arg-expr ...)]
+    )
+)
+
+;;3 
+
+define-syntax (pipe-v3 stx)
+  (syntax-case stx ()
+    [(_ val-expr) #'val-expr]
+    [(_ val-expr (fn-expr arg-expr ...) clause ...)
+          #'(pipe-v3 (fn-expr val-expr arg-expr ...) clause ...)]
+    )
+)
+
+;;4
+(define-syntax (pipe-v4 stx)
+  (syntax-case stx ()
+    [(_ val-expr) #'val-expr]
+    [(_ val-expr (fn-expr arg-expr ...) clause ...)
+          #'(pipe-v4 (fn-expr val-expr arg-expr ...) clause ...)]
+    [(_ val-expr id-fn-expr clause ...)
+          #'(pipe-v4 (id-fn-expr val-expr) clause ...)]
+    )
+)
+
+
+;;5
+
+
+
 ;; condicional
 
 (define (lat? l)
